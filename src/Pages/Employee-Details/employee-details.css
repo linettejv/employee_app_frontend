@@ -1,0 +1,7 @@
+.card{
+    display: flex;
+    flex-direction: row;
+    width: 1500px;
+    background-color: bisque;
+    padding: 20px;
+}

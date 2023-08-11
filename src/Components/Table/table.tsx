@@ -1,6 +1,7 @@
 import React from 'react';
 import './table.css';
 import Status from '../Status/status';
+import { useNavigate } from 'react-router-dom';
 
 const Table: React.FC = () => {
   const headValues = [
@@ -17,7 +18,7 @@ const Table: React.FC = () => {
     {
       id: 4,
       name: 'linette',
-      joiningDate: '2011-10-02T00:00:00.000Z',
+      joiningDate: '2011-10-02',
       isActive: false,
       experience: 9,
       role: 'Developer',
@@ -26,7 +27,7 @@ const Table: React.FC = () => {
     {
       id: 3,
       name: 'devi',
-      joiningDate: '2011-10-02T00:00:00.000Z',
+      joiningDate: '2011-10-02',
       isActive: true,
       experience: 9,
       role: 'HR',
@@ -35,7 +36,7 @@ const Table: React.FC = () => {
     {
       id: 1,
       name: 'Ashok',
-      joiningDate: '2012-10-02T00:00:00.000Z',
+      joiningDate: '2012-10-02',
       isActive: true,
       experience: 8,
       role: 'HR',
@@ -44,7 +45,7 @@ const Table: React.FC = () => {
     {
       id: 6,
       name: 'Ashok k',
-      joiningDate: '2012-11-01T18:30:00.000Z',
+      joiningDate: '2012-11-01',
       isActive: false,
       experience: 8,
       role: 'HR',
@@ -53,7 +54,7 @@ const Table: React.FC = () => {
     {
       id: 8,
       name: 'Ashok',
-      joiningDate: '2012-11-01T18:30:00.000Z',
+      joiningDate: '2012-11-01',
       isActive: true,
       experience: 8,
       role: 'HR',
@@ -61,11 +62,16 @@ const Table: React.FC = () => {
     }
   ];
 
+  const navigate = useNavigate();
+  const HandleNavigate = (id) => {
+    navigate(`/employees/${id}`);
+  };
+
   return (
     <>
       <table className='table'>
         <thead className='header'>
-          <tr className='rows'>
+          <tr className='header-row'>
             {headValues.map((val) => (
               <td className='data' key={val}>
                 {val}
@@ -75,7 +81,7 @@ const Table: React.FC = () => {
         </thead>
         <tbody>
           {data.map((row) => (
-            <tr className='rows' key={row.id}>
+            <tr className='rows' key={row.id} onClick={() => HandleNavigate(row.id)}>
               <td className='data'>{row.name}</td>
               <td className='data'>{row.id}</td>
               <td className='data'>{row.joiningDate}</td>
