@@ -1,0 +1,42 @@
+.create-emp {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-left: 300px;
+  background-color: white;
+  width: 1500px;
+  height: 90px;
+  margin-right: 10px;
+  border-radius: 7px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  justify-content: space-between;
+}
+
+
+
+.create-emp-text {
+ 
+  font-weight: 500;
+  /* padding-top: 20px; */
+  margin-left: 20px;
+  font-family: 'Montserrat';
+  color: black;
+  font-size: larger;
+}
+
+.add-button-div {
+
+  width: 200px;
+  height: 50px;
+  align-self:right;
+  border-radius: 30%;
+  background-color: #EAF9FF;
+  margin-left: 30px;
+}
+
+.add-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}

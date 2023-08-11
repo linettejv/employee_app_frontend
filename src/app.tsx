@@ -3,7 +3,7 @@ import './styles/global.css';
 
 import Login from './Pages/login/Login';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Employee from './Pages/login/Employee/employee';
+import Employee from './Pages/Employee/Employee/employee';
 
 const App: FC = () => {
   return (

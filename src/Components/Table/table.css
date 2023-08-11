@@ -1,0 +1,19 @@
+.data {
+    padding-left: 10px;
+    padding-right: 30px;
+    align-self: center;
+}
+.header{
+    background-color: #EAF9FF;
+    font: normal normal bold 16px/22px Nunito Sans;
+    width : 100%;
+    height: 50px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.table{
+    margin-top: 10px;
+    width: 1500px;
+    height: 700px;
+    margin-left: 300px;
+}
