@@ -25,26 +25,26 @@ const Login: FC = () => {
         </div>
         <div className='right-section'>
           <img className='logo' src='/assets/img/kv-logo.png' alt='Kv logo' />
-          <div className='forms'>
-            <Input
-              // label='Username'
-              placeholder='Username'
-              type='text'
-              value={username}
-              //onChange={handleOnChange}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <Input
-              // label='Password'
-              placeholder='Password'
-              type='password'
-              value={password}
-              //onChange={handleOnChange}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button text='login' type='enabled' onClick={handleClick} />
-            {showError && <div>username and password invalid</div>}
-          </div>
+          {/* <div className='forms'> */}
+          <Input
+            // label='Username'
+            placeholder='Username / Email'
+            type='text'
+            value={username}
+            //onChange={handleOnChange}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            // label='Password'
+            placeholder='Password'
+            type='password'
+            value={password}
+            //onChange={handleOnChange}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button text='Login' type='enabled' onClick={handleClick} />
+          {/* </div> */}
+          {showError && <div>Username or Password Invalid !</div>}
         </div>
       </section>
     </main>

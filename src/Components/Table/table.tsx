@@ -2,6 +2,7 @@ import React from 'react';
 import './table.css';
 import Status from '../Status/status';
 import { useNavigate } from 'react-router-dom';
+import data from '../../data';
 
 const Table: React.FC = () => {
   const headValues = [
@@ -14,57 +15,14 @@ const Table: React.FC = () => {
     'Action'
   ];
 
-  const data = [
-    {
-      id: 4,
-      name: 'linette',
-      joiningDate: '2011-10-02',
-      isActive: false,
-      experience: 9,
-      role: 'Developer',
-      departmentId: 3
-    },
-    {
-      id: 3,
-      name: 'devi',
-      joiningDate: '2011-10-02',
-      isActive: true,
-      experience: 9,
-      role: 'HR',
-      departmentId: 3
-    },
-    {
-      id: 1,
-      name: 'Ashok',
-      joiningDate: '2012-10-02',
-      isActive: true,
-      experience: 8,
-      role: 'HR',
-      departmentId: 2
-    },
-    {
-      id: 6,
-      name: 'Ashok k',
-      joiningDate: '2012-11-01',
-      isActive: false,
-      experience: 8,
-      role: 'HR',
-      departmentId: 2
-    },
-    {
-      id: 8,
-      name: 'Ashok',
-      joiningDate: '2012-11-01',
-      isActive: true,
-      experience: 8,
-      role: 'HR',
-      departmentId: 2
-    }
-  ];
-
   const navigate = useNavigate();
   const HandleNavigate = (id) => {
     navigate(`/employees/${id}`);
+  };
+
+  const HandleEditNavigate = (e, id) => {
+    navigate(`/edit-employee/${id}`);
+    e.stopPropagation();
   };
 
   return (
@@ -90,6 +48,16 @@ const Table: React.FC = () => {
                 <Status isActive={row.isActive} />
               </td>
               <td className='data'>{row.experience}</td>
+              <td>
+                <div className='edit-div'>
+                  <img className='delete-img' src='./assets/img/delete.png' />
+                  <img
+                    className='edit-img'
+                    src='./assets/img/edit.png'
+                    onClick={(e) => HandleEditNavigate(e, row.id)}
+                  />
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

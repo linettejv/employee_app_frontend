@@ -1,0 +1,10 @@
+.last-line{
+    display: flex;
+    flex-direction: row;
+}
+
+.line-empId{
+    padding-top: 30px;
+    padding-left: 50px;
+}
+

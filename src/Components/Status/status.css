@@ -1,0 +1,8 @@
+.status{
+    display: flex;
+    border-radius: 17px;
+    justify-items: center;
+    align-items: center;
+    height: 40px;
+    width: 150px;
+}

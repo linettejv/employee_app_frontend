@@ -1,7 +1,21 @@
-.card{
+
+.Card {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap; 
+    margin-top: 20px;
+    padding-top: 40px;
+    margin-left: 300px;
+    background-color: white; 
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    justify-content: space-between;
+    height: 232px;
     width: 1500px;
-    background-color: bisque;
-    padding: 20px;
-}
+  }
+
+  .Card >*{
+    margin-left: 30px;
+    padding-right: 30px;
+    width: 25%;
+  }
+  

@@ -9,8 +9,8 @@ type DetailsCardPropsTypes = {
 const DetailsCard: React.FC<DetailsCardPropsTypes> = (props) => {
   return (
     <div className='card'>
-      <div>{props.label}</div>
-      <div>{props.data}</div>
+      <div className='label'>{props.label}</div>
+      <div className='data'>{props.data}</div>
     </div>
   );
 };

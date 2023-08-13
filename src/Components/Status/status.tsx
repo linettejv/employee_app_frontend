@@ -19,11 +19,13 @@ const Status: React.FC<StatusProps> = (props) => {
   return (
     <>
       {props.isActive && (
-        <div style={{ backgroundColor: statusCode.active.color }}>{statusCode.active.label}</div>
+        <div className='status' style={{ backgroundColor: statusCode.active.color }}>
+          {statusCode.active.label}
+        </div>
       )}
 
       {!props.isActive && (
-        <div style={{ backgroundColor: statusCode.inactive.color }}>
+        <div className='status' style={{ backgroundColor: statusCode.inactive.color }}>
           {statusCode.inactive.label}
         </div>
       )}

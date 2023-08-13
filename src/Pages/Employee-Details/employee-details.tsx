@@ -16,18 +16,26 @@ const DetailsPage: React.FC = () => {
   console.log(emp);
 
   return (
-    <>
+    <div className='main'>
       <SideNav />
       <Header />
-      <SubHeader label={'Employee Details Page'} />
+      <SubHeader
+        label={'Employee Details Page'}
+        haveDiv={true}
+        sideBlueLabel='Edit'
+        imgScr='./assets/img/edit.png'
+        navigatePath={`/edit-employee/${id}`}
+      />
       <div className='Card'>
         <DetailsCard label={'name'} data={emp.name} />
         <DetailsCard label={'Joining Date'} data={emp.joiningDate} />
         <DetailsCard label={'Experience'} data={emp.joiningDate} />
+        <DetailsCard label={'Experience'} data={emp.joiningDate} />
         <DetailsCard label={'Role'} data={emp.role} />
         <DetailsCard label={'Emp Id'} data={String(emp.id)} />
+        <DetailsCard label={'Employee Address'} data={String(emp.departmentId)} />
       </div>
-    </>
+    </div>
   );
 };
 
