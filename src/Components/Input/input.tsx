@@ -1,7 +1,7 @@
 import './input.css';
 import React from 'react';
 
-type InputPropsTypes = {
+export type InputPropsTypes = {
   label?: string;
   value: string;
   placeholder: string;
@@ -13,13 +13,14 @@ type InputPropsTypes = {
 const Input: React.FC<InputPropsTypes> = (props) => {
   return (
     <div className='input'>
-      <label>{props.label}</label>
+      <label data-testid='input-test-on-label'>{props.label}</label>
       <input
         type={props.type}
         onChange={props.onChange}
         value={props.value}
         placeholder={props.placeholder}
         disabled={props.disabled}
+        data-testid='input-test'
       />
     </div>
   );

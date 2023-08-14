@@ -23,7 +23,7 @@ const DetailsPage: React.FC = () => {
         label={'Employee Details Page'}
         haveDiv={true}
         sideBlueLabel='Edit'
-        imgScr='./assets/img/edit.png'
+        imgScr='/assets/icons/edit.svg'
         navigatePath={`/edit-employee/${id}`}
       />
       <div className='Card'>
@@ -33,7 +33,7 @@ const DetailsPage: React.FC = () => {
         <DetailsCard label={'Experience'} data={emp.joiningDate} />
         <DetailsCard label={'Role'} data={emp.role} />
         <DetailsCard label={'Emp Id'} data={String(emp.id)} />
-        <DetailsCard label={'Employee Address'} data={String(emp.departmentId)} />
+        <DetailsCard label={'Employee Address'} data={String(emp.address)} />
       </div>
     </div>
   );

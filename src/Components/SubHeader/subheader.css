@@ -42,6 +42,9 @@
 
 img {
   align-self: center;
+  object-fit: contain;
+  height: 30px;
+  width: 30px;
 }
 
 .text {
