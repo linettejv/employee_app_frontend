@@ -3,14 +3,10 @@ import './dropDown.css';
 type DropDownProps = {
   label: string;
   options: string[];
+  onChange?: (e) => void;
 };
 const DropDown: React.FC<DropDownProps> = (props) => {
-  const handleSelected = (e) => {
-    console.log(e);
-    //if (props.label == 'Department') setDepartment(e.target.value);
-    //if (props.label == 'Role') setRole(e.target.value);
-    //if (props.label == 'Status') setStatus(e.target.value);
-  };
+  // const handleSelected = (e) => props.onChange(e.target.value);
 
   //const [department, setDepartment] = useState('');
   //const [role, setRole] = useState('');
@@ -18,7 +14,7 @@ const DropDown: React.FC<DropDownProps> = (props) => {
   return (
     <div className='dropDown'>
       <label>{props.label}</label>
-      <select onChange={handleSelected}>
+      <select onChange={props.onChange}>
         {props.options}
         {props.options.map((item) => (
           <option key={item} value={item}>
