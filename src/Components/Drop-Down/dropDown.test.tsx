@@ -29,8 +29,7 @@ describe('Tests for Dropdown Component', () => {
 
     const DropDowntypes: DropDownProps = {
       label: 'Drop-Down',
-      options: ['1', '2'],
-      handleSelected
+      options: ['1', '2']
     };
 
     render(<DropDown {...DropDowntypes} />);
