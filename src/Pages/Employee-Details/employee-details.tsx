@@ -7,11 +7,17 @@ import SubHeader from '../../Components/SubHeader/subheader';
 //import { useParams } from 'react-router-dom';
 import DetailsCard from '../../Components/Details-Card/detailsCard';
 import { useParams } from 'react-router-dom';
-import data from '../../data';
+import { useSelector } from 'react-redux';
 
 const DetailsPage: React.FC = () => {
+  const employeesData = useSelector((state: any) => {
+    console.log(state.employees);
+
+    return state.employees;
+  });
   const { id } = useParams();
-  const emp = data.find((emp) => emp.id === Number(id));
+  // data.find
+  const emp = employeesData.find((emp) => emp.id === Number(id));
 
   console.log(emp);
 
@@ -27,7 +33,7 @@ const DetailsPage: React.FC = () => {
         navigatePath={`/edit-employee/${id}`}
       />
       <div className='Card'>
-        <DetailsCard label={'name'} data={emp.name} />
+        <DetailsCard label={'Employee Name'} data={emp.name} />
         <DetailsCard label={'Joining Date'} data={emp.joiningDate} />
         <DetailsCard label={'Experience'} data={emp.joiningDate} />
         <DetailsCard label={'Experience'} data={emp.joiningDate} />

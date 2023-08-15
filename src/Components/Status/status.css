@@ -1,6 +1,7 @@
 .status{
     display: flex;
     flex-direction: column;
+    padding-top: 10px;
     border-radius: 17px;
     justify-items: center;
     align-items: center;

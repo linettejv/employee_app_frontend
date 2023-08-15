@@ -2,9 +2,18 @@ import React from 'react';
 import './table.css';
 import Status from '../Status/status';
 import { useNavigate } from 'react-router-dom';
-import data from '../../data';
+// import data from '../../data';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Table: React.FC = () => {
+  const employeesData = useSelector((state: any) => {
+    console.log(state.employees);
+
+    return state.employees;
+  });
+
+  const dispatch = useDispatch();
+
   const headValues = [
     'Employee Name ',
     'Employee Id',
@@ -25,6 +34,17 @@ const Table: React.FC = () => {
     e.stopPropagation();
   };
 
+  const HandleDeleteNavigate = (e, id) => {
+    console.log(id);
+    dispatch({
+      type: 'EMPLOYEE:DELETE',
+      payload: {
+        id: id
+      }
+    });
+    e.stopPropagation();
+  };
+
   return (
     <>
       <table className='table'>
@@ -38,7 +58,7 @@ const Table: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((row) => (
+          {employeesData.map((row) => (
             <tr className='rows' key={row.id} onClick={() => HandleNavigate(row.id)}>
               <td className='data'>{row.name}</td>
               <td className='data'>{row.id}</td>
@@ -50,7 +70,11 @@ const Table: React.FC = () => {
               <td className='data'>{row.experience}</td>
               <td>
                 <div className='edit-div'>
-                  <img className='delete-img' src='./assets/img/delete.png' />
+                  <img
+                    className='delete-img'
+                    src='./assets/img/delete.png'
+                    onClick={(e) => HandleDeleteNavigate(e, row.id)}
+                  />
                   <img
                     className='edit-img'
                     src='./assets/img/edit.png'

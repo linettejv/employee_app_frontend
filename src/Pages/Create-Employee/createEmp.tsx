@@ -7,8 +7,33 @@ import Input from '../../Components/Input/input';
 import DropDown from '../../Components/Drop-Down/dropDown';
 // import Button from '../../Components/Button/button';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const CreateEmp = () => {
+  const dispatch = useDispatch();
+  let i = 9;
+
+  const handleSubmit = () => {
+    console.log(newdata);
+    dispatch({
+      type: 'EMPLOYEE:CREATE',
+      payload: {
+        employee: {
+          id: ++i,
+          name: newdata.name,
+          joiningDate: newdata.joining_date,
+          experience: newdata.experience,
+          isActive: newdata.status,
+          role: newdata.role,
+          departmentId: newdata.department,
+          address: newdata.flat_house,
+          line1: newdata.add_line1,
+          line2: newdata.add_line2
+        }
+      }
+    });
+    navigate('/employees');
+  };
   const [newdata, setdata] = useState({
     name: '',
     joining_date: '',
@@ -64,9 +89,21 @@ const CreateEmp = () => {
           />
         </div>
         <div className='line-2'>
-          <DropDown label='Department' options={['HR', 'Front-end', 'Back-end', 'Dev-Ops', 'QA']} />
-          <DropDown label='Role' options={['Fresher', 'Intern', 'SDE-1', 'SDE-2', 'Manager']} />
-          <DropDown label='Status' options={['Active', 'In-Active']} />
+          <DropDown
+            label='Department'
+            options={['HR', 'Front-end', 'Back-end', 'Dev-Ops', 'QA']}
+            onChange={(e) => handleOnChange('department', e.target.value)}
+          />
+          <DropDown
+            label='Role'
+            options={['Fresher', 'Intern', 'SDE-1', 'SDE-2', 'Manager']}
+            onChange={(e) => handleOnChange('role', e.target.value)}
+          />
+          <DropDown
+            label='Status'
+            options={['Active', 'In-Active']}
+            onChange={(e) => handleOnChange('status', e.target.value)}
+          />
         </div>
         <div className='line-3'>
           <Input
@@ -90,7 +127,8 @@ const CreateEmp = () => {
           />
         </div>
         <div className='line-4'>
-          <button className='Button-submit' onClick={handleClick}>
+          <button className='Button-submit' onClick={handleSubmit}>
+            {/* it was onClick before */}
             Submit
           </button>
           <button className='button-cancel' onClick={handleClick}>
