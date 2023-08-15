@@ -2,7 +2,7 @@ import React from 'react';
 import './subheader.css';
 import { useNavigate } from 'react-router-dom';
 
-type SubHeaderPropsTypes = {
+export type SubHeaderPropsTypes = {
   label: string;
   haveDiv?: boolean;
   sideBlueLabel?: string;
@@ -19,9 +19,9 @@ const SubHeader: React.FC<SubHeaderPropsTypes> = (props) => {
     <div className='create-emp'>
       <p className='create-emp-text'>{props.label}</p>
       {props.haveDiv && (
-        <div className='side-blue'>
+        <div data-testid='div-test' className='side-blue'>
           <div className='add-button-div'>
-            <button className='add-button' onClick={HandleNavigate}>
+            <button data-testid='div-test-button' className='add-button' onClick={HandleNavigate}>
               <img className='img' src={props.imgScr} alt='plus' />
             </button>
           </div>

@@ -1,27 +1,22 @@
 import React from 'react';
 import './dropDown.css';
-type DropDownProps = {
+export type DropDownProps = {
   label: string;
   options: string[];
+  handleSelected?: (e) => void;
 };
 const DropDown: React.FC<DropDownProps> = (props) => {
   const handleSelected = (e) => {
     console.log(e);
-    //if (props.label == 'Department') setDepartment(e.target.value);
-    //if (props.label == 'Role') setRole(e.target.value);
-    //if (props.label == 'Status') setStatus(e.target.value);
   };
 
-  //const [department, setDepartment] = useState('');
-  //const [role, setRole] = useState('');
-  //const [status, setStatus] = useState('');
   return (
-    <div className='dropDown'>
-      <label>{props.label}</label>
-      <select onChange={handleSelected}>
+    <div data-testid='dropdown-div' className='dropDown'>
+      <label data-testid='dropdown-label'>{props.label}</label>
+      <select data-testid='dropdown-select' onChange={handleSelected}>
         {props.options}
         {props.options.map((item) => (
-          <option key={item} value={item}>
+          <option data-testid='dropdown-option' key={item} value={item}>
             {item}
           </option>
         ))}
