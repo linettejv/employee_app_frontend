@@ -5,32 +5,48 @@ import Header from '../../Components/Header/header';
 import SubHeader from '../../Components/SubHeader/subheader';
 import Input from '../../Components/Input/input';
 import DropDown from '../../Components/Drop-Down/dropDown';
-// import Button from '../../Components/Button/button';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
+// import { addEmployee } from '../../Actions/employeesAction';
+import { useCreateEmployeeMutation, useGetDepartmentsQuery } from '../Employee/Employee/api';
 
 const CreateEmp = () => {
-  const dispatch = useDispatch();
-  let i = 9;
+  // const dispatch = useDispatch();
+  var i = 10;
+  // create a state to store employee id
+
+  const [createEmployee] = useCreateEmployeeMutation();
+
+  const { data } = useGetDepartmentsQuery();
+
+  if (data) console.log(data);
+
+  let deptArr = [];
+
+  if (data) data.forEach((dept) => deptArr.push(dept.name));
+  console.log('departments ', deptArr);
 
   const handleSubmit = () => {
     console.log(newdata);
-    dispatch({
-      type: 'EMPLOYEE:CREATE',
-      payload: {
-        employee: {
-          id: ++i,
-          name: newdata.name,
-          joiningDate: newdata.joining_date,
-          experience: newdata.experience,
-          isActive: newdata.status,
-          role: newdata.role,
-          departmentId: newdata.department,
-          address: newdata.flat_house,
-          line1: newdata.add_line1,
-          line2: newdata.add_line2
-        }
-      }
+    console.log('current id :', i);
+    createEmployee({
+      name: newdata.name,
+      joining_date: newdata.joining_date,
+      status: newdata.isActive,
+      experience: Number(newdata.experience),
+      role: newdata.role,
+      department_id: 2,
+      department: newdata.department,
+      address: {
+        City: 'Thrissur',
+        Country: 'India',
+        line1: newdata.add_line1,
+        address_line2: newdata.add_line2,
+        State: newdata.flat_house,
+        pincode: '680001'
+      },
+      email: newdata.username,
+      password: newdata.password
     });
     navigate('/employees');
   };
@@ -40,10 +56,12 @@ const CreateEmp = () => {
     experience: '',
     department: '',
     role: '',
-    status: '',
+    isActive: '',
     flat_house: '',
     add_line1: '',
-    add_line2: ''
+    add_line2: '',
+    username: '',
+    password: ''
   });
 
   const navigate = useNavigate();
@@ -90,41 +108,59 @@ const CreateEmp = () => {
         </div>
         <div className='line-2'>
           <DropDown
-            label='Department'
-            options={['HR', 'Front-end', 'Back-end', 'Dev-Ops', 'QA']}
+            label='Work status'
+            options={['Fresher', 'Intern', 'SDE-1', 'SDE-2', 'Manager']}
             onChange={(e) => handleOnChange('department', e.target.value)}
           />
           <DropDown
-            label='Role'
-            options={['Fresher', 'Intern', 'SDE-1', 'SDE-2', 'Manager']}
+            label='Department'
+            options={deptArr}
             onChange={(e) => handleOnChange('role', e.target.value)}
           />
           <DropDown
             label='Status'
-            options={['Active', 'In-Active']}
-            onChange={(e) => handleOnChange('status', e.target.value)}
+            options={['Active', 'In-Active', 'Probation']}
+            onChange={(e) => handleOnChange('isActive', e.target.value)}
           />
         </div>
-        <div className='line-3'>
-          <Input
-            label='Address'
-            placeholder='Flat No./House No.'
-            type='text'
-            onChange={(e) => handleOnChange('flat_house', e.target.value)}
-            value={newdata.flat_house}
-          />
-          <Input
-            placeholder='Address line 1'
-            type='text'
-            onChange={(e) => handleOnChange('add_line1', e.target.value)}
-            value={newdata.add_line1}
-          />
-          <Input
-            placeholder='Address line 2'
-            type='text'
-            onChange={(e) => handleOnChange('add_line2', e.target.value)}
-            value={newdata.add_line2}
-          />
+        <div className='last-line'>
+          <div className='line-3'>
+            <Input
+              label='Address'
+              placeholder='Flat No./House No.'
+              type='text'
+              onChange={(e) => handleOnChange('flat_house', e.target.value)}
+              value={newdata.flat_house}
+            />
+            <Input
+              placeholder='Address line 1'
+              type='text'
+              onChange={(e) => handleOnChange('add_line1', e.target.value)}
+              value={newdata.add_line1}
+            />
+            <Input
+              placeholder='Address line 2'
+              type='text'
+              onChange={(e) => handleOnChange('add_line2', e.target.value)}
+              value={newdata.add_line2}
+            />
+          </div>
+          <div className='line-id'>
+            <Input
+              label='Email'
+              placeholder='email-username'
+              type='text'
+              onChange={(e) => handleOnChange('username', e.target.value)}
+              value={newdata.username}
+            />
+            <Input
+              label='Password'
+              placeholder='password'
+              type='text'
+              onChange={(e) => handleOnChange('password', e.target.value)}
+              value={newdata.password}
+            />
+          </div>
         </div>
         <div className='line-4'>
           <button className='Button-submit' onClick={handleSubmit}>

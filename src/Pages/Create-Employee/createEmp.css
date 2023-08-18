@@ -27,6 +27,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 30px;
+  
 }
 
 .line-3>* {
@@ -59,4 +60,13 @@
 
 .line-4{
   margin-left: 50px;
+}
+
+.line-id{
+  padding-top: 30px;
+  padding-left: 50px;
+}
+
+.line-id >* {
+  margin-bottom: 20px;
 }

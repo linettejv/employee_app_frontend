@@ -2,23 +2,30 @@ import React from 'react';
 import './table.css';
 import Status from '../Status/status';
 import { useNavigate } from 'react-router-dom';
-// import data from '../../data';
-import { useDispatch, useSelector } from 'react-redux';
+import { useGetEmployeeListQuery } from '../../Pages/Employee/Employee/api';
 
-const Table: React.FC = () => {
-  const employeesData = useSelector((state: any) => {
-    console.log(state.employees);
+const Table = (props) => {
+  const { data } = useGetEmployeeListQuery();
 
-    return state.employees;
-  });
+  console.log(props);
+  const onDeleteClick = (e, id) => {
+    console.log('to pop up');
 
-  const dispatch = useDispatch();
+    e.stopPropagation();
+    props.deleteId.current = id;
+
+    return props.onDeleteClick(true);
+  };
+
+  let showActions = false;
+
+  if (localStorage.getItem('Role') === 'HR') showActions = true;
 
   const headValues = [
     'Employee Name ',
     'Employee Id',
     'Joining Date',
-    'Role',
+    'Department',
     'Status',
     'Experience',
     'Action'
@@ -34,16 +41,7 @@ const Table: React.FC = () => {
     e.stopPropagation();
   };
 
-  const HandleDeleteNavigate = (e, id) => {
-    console.log(id);
-    dispatch({
-      type: 'EMPLOYEE:DELETE',
-      payload: {
-        id: id
-      }
-    });
-    e.stopPropagation();
-  };
+  if (!data) return <div>loading</div>;
 
   return (
     <>
@@ -58,30 +56,32 @@ const Table: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {employeesData.map((row) => (
+          {data.employees.map((row) => (
             <tr className='rows' key={row.id} onClick={() => HandleNavigate(row.id)}>
               <td className='data'>{row.name}</td>
               <td className='data'>{row.id}</td>
-              <td className='data'>{row.joiningDate}</td>
+              <td className='data'>{row.joining_date}</td>
               <td className='data'>{row.role}</td>
               <td className='data'>
-                <Status isActive={row.isActive} />
+                <Status isActive={row.status} />
               </td>
               <td className='data'>{row.experience}</td>
-              <td>
-                <div className='edit-div'>
-                  <img
-                    className='delete-img'
-                    src='./assets/img/delete.png'
-                    onClick={(e) => HandleDeleteNavigate(e, row.id)}
-                  />
-                  <img
-                    className='edit-img'
-                    src='./assets/img/edit.png'
-                    onClick={(e) => HandleEditNavigate(e, row.id)}
-                  />
-                </div>
-              </td>
+              {showActions && (
+                <td>
+                  <div className='edit-div'>
+                    <img
+                      className='delete-img'
+                      src='./assets/img/delete.png'
+                      onClick={(e) => onDeleteClick(e, row.id)}
+                    />
+                    <img
+                      className='edit-img'
+                      src='./assets/img/edit.png'
+                      onClick={(e) => HandleEditNavigate(e, row.id)}
+                    />
+                  </div>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

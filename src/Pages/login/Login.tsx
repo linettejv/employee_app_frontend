@@ -1,9 +1,9 @@
-import { useState, type FC } from 'react';
+import { useState, type FC, useEffect } from 'react';
 import './login.css';
-
 import Button from '../../Components/Button/button';
 import Input from '../../Components/Input/input';
 import { useNavigate } from 'react-router-dom';
+import { useLoginMutation } from './api';
 
 const Login: FC = () => {
   const [username, setUsername] = useState('');
@@ -13,9 +13,24 @@ const Login: FC = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     console.log('Clicked');
-    if (username && password) navigate('/employees');
+    if (username && password)
+      login({
+        email: username,
+        password: password
+      });
     else setError(true);
   };
+
+  const [login, { data, isSuccess }] = useLoginMutation();
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      navigate('/employees');
+      console.log(data);
+      localStorage.setItem('AuthKey', data.data);
+      localStorage.setItem('Role', data.employee.role);
+    }
+  }, [data, isSuccess]);
 
   return (
     <main>

@@ -12,7 +12,7 @@ const DropDown: React.FC<DropDownProps> = (props) => {
     <div className='dropDown'>
       <label>{props.label}</label>
       <select onChange={props.onChange}>
-        {props.options}
+        {/* {props.options} */}
         {props.options.map((item) => (
           <option data-testid='dropdown-option' key={item} value={item}>
             {item}

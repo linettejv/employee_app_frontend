@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export type SubHeaderPropsTypes = {
   label: string;
   haveDiv?: boolean;
-  sideBlueLabel?: string;
+  sideBlueLabel?: string | boolean;
   imgScr?: string;
   navigatePath?: string;
 };

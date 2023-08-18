@@ -9,7 +9,7 @@
     border-radius: 7px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     justify-content: space-between;
-    height: 232px;
+    height: 300px;
     width: 1500px;
   }
 
@@ -18,4 +18,9 @@
     padding-right: 30px;
     width: 25%;
   }
-  
+
+  /* .status{
+    height: 50px;
+    margin-right: 40px;
+    
+  } */

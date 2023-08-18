@@ -26,7 +26,7 @@ table {
 
 .rows {
     background-color: #FFFFFF;
-    font: normal normal bold 16px/22px Nunito Sans;
+    font: normal normal normal 16px/22px Nunito Sans;
     width: 1500px;
     height: 60px;
     margin-top: 40px;
@@ -50,4 +50,11 @@ table {
     width: 20px;
     height: 20px;
     margin-left: 17px;
+}
+
+td:first-child{
+    border-radius: 5px 0 0 5px;
+}
+td:last-child{
+    border-radius: 0 5px 5px 0;
 }

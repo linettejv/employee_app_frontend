@@ -7,28 +7,40 @@ import Input from '../../Components/Input/input';
 import { useNavigate, useParams } from 'react-router-dom';
 // import data from '../../data';
 import DropDown from '../../Components/Drop-Down/dropDown';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
+// import { editEmployee } from '../../Actions/employeesAction';
+import { useGetEmployeeByIdQuery, useUpdateEmployeeMutation } from '../Employee/Employee/api';
 
 const EditEmp = () => {
-  const employeesData = useSelector((state: any) => {
-    return state.employees;
-  });
+  // const employeesData = useSelector((state: any) => {
+  //   return state.employees;
+  // });
 
   const { id } = useParams();
-  const emp = employeesData.find((emp) => emp.id === Number(id));
+  /// const emp = employeesData?.find((emp) => emp.id === Number(id));
+  const { data } = useGetEmployeeByIdQuery(Number(id));
 
-  console.log(emp);
+  console.log('data' + data);
+  if (!data) return <div>loading</div>;
+
+  const emp = data.employee;
+
+  console.log('fetched employee' + emp);
   const [editData, setdata] = useState({
     id: emp.id,
     name: emp.name,
-    joiningDate: emp.joiningDate,
+    joining_date: emp.joining_date,
     isActive: emp.status,
     experience: emp.experience,
     role: emp.role,
-    departmentId: emp.departmentId,
-    address: emp.address,
-    line1: emp.line1,
-    line2: emp.line2
+    department_id: emp.department_id,
+    address: {
+      City: emp.address.City,
+      Country: emp.address.Country,
+      line1: emp.address.line1,
+      address_line2: emp.address.address_line2
+    },
+    department: emp.department
   });
 
   const navigate = useNavigate();
@@ -36,30 +48,35 @@ const EditEmp = () => {
     navigate('/employees');
   };
 
-  const dispatch = useDispatch();
+  const [updateEmployee] = useUpdateEmployeeMutation();
+
+  // const dispatch = useDispatch();
   const handleSubmit = () => {
     console.log(editData);
-    dispatch({
-      type: 'EMPLOYEE:EDIT',
-      payload: {
-        employee: {
-          id: editData.id,
-          name: editData.name,
-          joiningDate: editData.joiningDate,
-          experience: editData.experience,
-          isActive: editData.isActive,
-          role: editData.role,
-          departmentId: editData.departmentId,
-          address: editData.address,
-          line1: editData.line1,
-          line2: editData.line2
-        }
-      }
+    updateEmployee({
+      id: editData.id,
+      name: editData.name,
+      joining_date: editData.joining_date,
+      status: editData.isActive,
+      experience: editData.experience,
+      role: editData.role,
+      department_id: editData.department_id,
+      department: editData.department,
+      address: {
+        City: editData.address.City,
+        Country: editData.address.Country,
+        line1: 'Line 1',
+        address_line2: editData.address.address_line2,
+        pincode: '680011'
+      },
+      email: emp.email,
+      password: emp.password
     });
     navigate('/employees');
   };
 
   const handleOnChange = (key, value) => {
+    console.log(value);
     const tempData = { ...editData };
 
     tempData[key] = value;
@@ -83,10 +100,10 @@ const EditEmp = () => {
           />
           <Input
             label='Joining Date'
-            placeholder={editData.joiningDate}
+            placeholder={editData.joining_date}
             type='text'
             onChange={(e) => handleOnChange('joiningDate', e.target.value)}
-            value={editData.joiningDate}
+            value={editData.joining_date}
           />
           <Input
             label='Experience'
@@ -109,8 +126,8 @@ const EditEmp = () => {
           />
           <DropDown
             label='Status'
-            options={['Active', 'In-Active']}
-            onChange={(e) => handleOnChange('status', e.target.value)}
+            options={['Active', 'In-Active', 'Probation']}
+            onChange={(e) => handleOnChange('isActive', e.target.value)}
           />
         </div>
         <div className='last-line'>
@@ -120,28 +137,28 @@ const EditEmp = () => {
               placeholder='Flat No./House No.'
               type='text'
               onChange={(e) => handleOnChange('address', e.target.value)}
-              value={editData.address}
+              value={editData.address.line1}
             />
             <Input
               placeholder='Address line 1'
               type='text'
               onChange={(e) => handleOnChange('line1', e.target.value)}
-              value={editData.line1}
+              value={editData.address.address_line2}
             />
             <Input
               placeholder='Address line 2'
               type='text'
               onChange={(e) => handleOnChange('line2', e.target.value)}
-              value={editData.line2}
+              value={editData.address.City}
             />
           </div>
           <div className='line-empId'>
             <Input
               label='Employee Id'
-              placeholder={String(editData.id)}
+              placeholder={String(emp.id)}
               type='text'
               disabled={true}
-              value={String(editData.id)}
+              value={String(emp.id)}
             />
           </div>
         </div>
